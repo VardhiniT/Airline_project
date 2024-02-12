@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset = "UTF-8">
+        <meta http-equiv = "X-UA-Compatible" content = "IE=edge">
+        <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
+        <title>Flight Delay Predictor Page | Vardhini </title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+        <!-- <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'> -->
+    </head>
+
+    <body>
+        <div class="wrapper">
+        <form action="{{ url_for('predict_datapoint')}}" method="get">
+            <h1>
+                Know the Arrival Status of your Flight
+            </h1>
+            <div class="input-box">
+                <body>
+                    {% if prediction|float < 0 %}
+                    <p>The flight is expected to arrive {{ prediction|float|abs|round|int}} minutes earlier than scheduled.</p>
+                    {% else %}
+                    <p>According to the given information, the flight is predicted to be delayed by {{ prediction|float|round|int }} minutes.</p>
+                    {% endif %}
+                </body>
+            </div> 
+            <div class="backlink">
+                <p class="black-text"><a href="{{ url_for('predict_datapoint')}}">back to home page</a></p>
+            </div>
+        </form>
+    <body>
+</html>
